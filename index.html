@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sudoku Game</title>
+  <style>
+    body { font-family: Arial; text-align: center; }
+    table { border-collapse: collapse; margin: auto; }
+    td {
+      border: 1px solid #000;
+      width: 40px;
+      height: 40px;
+      text-align: center;
+    }
+    input {
+      width: 38px;
+      height: 38px;
+      text-align: center;
+      font-size: 18px;
+      border: none;
+    }
+    .bold { border: 2px solid black; }
+  </style>
+</head>
+<body>
+
+<h1>Sudoku</h1>
+
+<table id="grid"></table>
+
+<br>
+<button onclick="generateSudoku()">New Puzzle</button>
+
+<script>
+const grid = document.getElementById("grid");
+
+function createGrid() {
+  grid.innerHTML = "";
+  for (let i = 0; i < 9; i++) {
+    let row = document.createElement("tr");
+    for (let j = 0; j < 9; j++) {
+      let cell = document.createElement("td");
+      let input = document.createElement("input");
+      input.maxLength = 1;
+
+      if ((i % 3 === 2 && i !== 8)) cell.style.borderBottom = "2px solid black";
+      if ((j % 3 === 2 && j !== 8)) cell.style.borderRight = "2px solid black";
+
+      cell.appendChild(input);
+      row.appendChild(cell);
+    }
+    grid.appendChild(row);
+  }
+}
+
+function generateSudoku() {
+  const inputs = document.querySelectorAll("input");
+  inputs.forEach(input => {
+    input.value = Math.random() > 0.7 ? Math.ceil(Math.random() * 9) : "";
+  });
+}
+
+createGrid();
+generateSudoku();
+</script>
+
+</body>
+</html>
